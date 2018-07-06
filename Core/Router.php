@@ -28,7 +28,7 @@ class Router {
 		self::$routes[$route] = $params;
 	}
 
-	public static function match($url) {
+	private static function match($url) {
 
 		// remove very last / if any from $url
 		$url = preg_replace('/\/$/', '', $url);
@@ -55,6 +55,41 @@ class Router {
 		return false;
 	}
 
+	public static function dispatch($url) {
+
+		if (self::match($url)) {
+			$controller = "\App\Controllers\\" . ucfirst(self::$params['controller']);
+
+			if (class_exists($controller)) {
+				$controller_obj = new $controller;
+
+				// if no action is passed on $url, call index method of $controller
+				if (!isset(self::$params['action'])) {
+
+					if (method_exists($controller_obj, 'index')) {
+						call_user_func_array([$controller_obj, 'index'], []);
+					}
+
+				} else {
+					$action = self::$params['action'];
+
+					if (method_exists($controller_obj, $action)) {
+						call_user_func_array([$controller_obj, $action], []);
+					} else {
+						echo "Method '$action' doesn't exists in $controller!";
+					}
+				}
+			} else {
+				echo "Controller '$controller' doesn't exists!";
+			}
+		} else {
+			echo "No match route!";
+		}
+
+	}
+
+	/*
+	 * Delete if not needed
 	public static function getRoutes() {
 		return self::$routes;
 	}
@@ -62,5 +97,6 @@ class Router {
 	public static function getParams() {
 		return self::$params;
 	}
+	 */
 
 }

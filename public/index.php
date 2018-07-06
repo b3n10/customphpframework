@@ -7,7 +7,11 @@ use \Core\Router;
 
 $url = $_SERVER['QUERY_STRING'];
 
+Router::add('', [
+	'controller' => 'Home'
+]);
 Router::add('{controller}');
 Router::add('{controller}/{action}');
 Router::add('{controller}/{id:\d+}/{action}');
 
+Router::dispatch($url);
