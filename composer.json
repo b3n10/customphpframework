@@ -1,0 +1,10 @@
+{
+	"require": {
+		"php": "7.1.18"
+	},
+	"autoload": {
+		"psr-4": {
+			"Core\\": "Core/"
+		}
+	}
+}
