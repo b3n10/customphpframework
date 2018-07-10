@@ -66,17 +66,16 @@ class Router {
 				// if no action is passed on $url, call index method of $controller
 				if (!isset(self::$params['action'])) {
 
-					if (method_exists($controller_obj, 'index')) {
-						call_user_func_array([$controller_obj, 'index'], []);
+					if (is_callable([$controller_obj, 'indexAction'])) {
+						$method = 'indexAction';
+						$controller_obj->$method();
 					}
 
 				} else {
 					$action = self::$params['action'];
 
-					if (method_exists($controller_obj, $action)) {
-						call_user_func_array([$controller_obj, $action], []);
-					} else {
-						echo "Method '$action' doesn't exists in $controller!";
+					if (is_callable([$controller_obj, $action])) {
+						$controller_obj->$action();
 					}
 				}
 			} else {
