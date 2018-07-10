@@ -57,26 +57,21 @@ class Router {
 
 	public static function dispatch($url) {
 
+		$url = self::removeQSVar($url);
+
 		if (self::match($url)) {
-			$controller = "\App\Controllers\\" . ucfirst(self::$params['controller']);
+			$controller = "\App\Controllers\\" . self::studlyCaps(self::$params['controller']);
 
 			if (class_exists($controller)) {
 				$controller_obj = new $controller;
 
 				// if no action is passed on $url, call index method of $controller
 				if (!isset(self::$params['action'])) {
-
-					if (is_callable([$controller_obj, 'indexAction'])) {
-						$method = 'indexAction';
-						$controller_obj->$method();
-					}
-
+					$method = 'indexAction';
+					$controller_obj->$method();
 				} else {
-					$action = self::$params['action'];
-
-					if (is_callable([$controller_obj, $action])) {
-						$controller_obj->$action();
-					}
+					$action = self::camelCase(self::$params['action']);
+					$controller_obj->$action();
 				}
 			} else {
 				echo "Controller '$controller' doesn't exists!";
@@ -85,6 +80,23 @@ class Router {
 			echo "No match route!";
 		}
 
+	}
+
+	private static function removeQSVar($url) {
+		if ($url !== '') {
+			$parts = explode('&', $url, 2);
+			$url = $parts[0];
+		}
+
+		return $url;
+	}
+
+	private static function studlyCaps($controller) {
+		return str_replace('-', '', ucwords($controller));
+	}
+
+	private static function camelCase($action) {
+		return str_replace('-', '', lcfirst($action));
 	}
 
 	/*
