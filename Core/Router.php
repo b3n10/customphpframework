@@ -74,10 +74,10 @@ class Router {
 					$controller_obj->$action();
 				}
 			} else {
-				echo "Controller '$controller' doesn't exists!";
+				throw new \Exception("Controller '$controller' doesn't exists!");
 			}
 		} else {
-			echo "No match route!";
+			throw new \Exception("No match route!");
 		}
 
 	}

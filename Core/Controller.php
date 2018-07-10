@@ -13,7 +13,7 @@ abstract class Controller {
 				$this->after();
 			}
 		} else {
-			echo "Method '$method' doesn't exists in " . get_class($this) . "!";
+			throw new \Exception("Method '$method' doesn't exists in " . get_class($this) . "!");
 		}
 
 	}

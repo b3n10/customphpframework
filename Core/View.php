@@ -11,7 +11,7 @@ class View {
 			extract($args, EXTR_SKIP);
 			require_once $file;
 		} else {
-			echo "File $file not found!";
+			throw new \Exception("File $file not found!");
 		}
 	}
 
