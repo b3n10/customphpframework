@@ -92,7 +92,7 @@ class Router {
 	}
 
 	private static function studlyCaps($controller) {
-		return str_replace('-', '', ucwords($controller));
+		return str_replace('-', '', ucwords($controller, '-'));
 	}
 
 	private static function camelCase($action) {
