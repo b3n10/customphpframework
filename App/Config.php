@@ -7,4 +7,5 @@ class Config {
 	const DBNAME 			= "mvcframework";
 	const DBUSER 			= "root";
 	const DBPASSWORD	=	"jairah";
+	const SHOW_ERRORS	=	false;
 }

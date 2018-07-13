@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use \App\Config;
+
 class Error {
 
 	public static function errorHandler($level, $msg, $file, $line) {
@@ -11,8 +13,12 @@ class Error {
 	}
 
 	public static function exceptionHandler($e) {
-		if ($e->getCode() === 404) http_response_code(404);
-		else http_response_code(500);
+		$code = 0;
+
+		if ($e->getCode() === 404) $code = 404;
+		else $code = 500;
+
+		http_response_code($code);
 
 		$error_message = '<h1>Fatal Error: </h1>';
 		$error_message .= '<p>Uncaught exception: "' . get_class($e) . '"</p>';
@@ -20,6 +26,17 @@ class Error {
 		$error_message .= '<p>Stack Trace: <pre>' . $e->getTraceAsString() . '</pre></p>';
 		$error_message .= '<p>Thrown in "' . $e->getFile() . '" on line "' . $e->getLine() . '"';
 
-		echo $error_message;
+		if (Config::SHOW_ERRORS) {
+			echo $error_message;
+		} else {
+			$log_file = dirname(__DIR__) . '/logs/' . date('Y-m-d') . '.txt';
+			ini_set('error_log', $log_file);
+			error_log($error_message);
+
+			View::render("Errors/$code.php", [
+				'title'	=>	"$code"
+			]);
+		}
+
 	}
 }

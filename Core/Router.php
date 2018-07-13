@@ -77,7 +77,7 @@ class Router {
 				throw new \Exception("Controller '$controller' doesn't exists!");
 			}
 		} else {
-			throw new \Exception("No match route!");
+			throw new \Exception("No match route!", 404);
 		}
 
 	}
