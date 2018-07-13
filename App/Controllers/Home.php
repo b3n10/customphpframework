@@ -8,11 +8,10 @@ use \App\Models\User;
 class Home extends \Core\Controller {
 
 	public function indexAction() {
-		$user = User::first();
 
 		View::render('Home/index.php', [
 			'title'			=>	'HomePage',
-			'username'	=>	$user['name']
+			'username'	=>	'test user'
 		]);
 	}
 
