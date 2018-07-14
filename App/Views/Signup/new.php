@@ -7,7 +7,7 @@
 		</div>
 		<div>
 			<label for="input_email">Email Address:</label>
-			<input type="email" id="input_email" name="email" placeholder="name@company" />
+			<input type="text" id="input_email" name="email" placeholder="name@company" />
 		</div>
 		<div>
 			<label for="input_password">Password:</label>
