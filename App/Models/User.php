@@ -36,39 +36,49 @@ class User extends \Core\Model {
 	}
 
 	public function validate() {
+		// name
 		if ($this->name === '') {
 			$this->errors[] = 'Name is required!';
 		}
 
+		// email
+		if ($this->emailExists($this->email)) {
+			$this->errors[] = 'Email already exists !';
+		}
 		if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
 			$this->errors[] = 'Email is invalid!';
 		}
 
+		// password
 		if ($this->password !== $this->confirm_password) {
 			$this->errors[] = 'Password doesn\'t match confirmation!';
 		}
-
 		if (strlen($this->password) < 6) {
 			$this->errors[] = 'Password must be at least 6 characters!';
 		}
-
 		if (preg_match('/.*[a-z]+.*/', $this->password) === 0) {
 			$this->errors[] = 'Password must have at least one lowercase character!';
 		}
-
 		if (preg_match('/.*[A-Z]+.*/', $this->password) === 0) {
 			$this->errors[] = 'Password must have at least one uppercase character!';
 		}
-
 		if (preg_match('/.*\d+.*/', $this->password) === 0) {
 			$this->errors[] = 'Password must have at least one numeric character!';
 		}
-
 		if (preg_match('/.*[!-\/:-@\[-`{-~].*/', $this->password) === 0) {
 			$this->errors[] = 'Password must have at least one symbol!';
 		}
 
 		return $this->errors;
+	}
+
+	private function emailExists($email) {
+		$pdo = self::connectDB();
+		$stmt = $pdo->prepare("SELECT email from users WHERE email=:email");
+		$stmt->bindValue(":email", $email, PDO::PARAM_STR);
+		$stmt->execute();
+
+		return $stmt->fetch() !== false;
 	}
 
 	public static function getAll() {
