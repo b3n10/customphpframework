@@ -8,7 +8,7 @@
 		</ul>
 	<?php endif ?>
 	<h1>Sign Up</h1>
-	<form action="/signup/create" method="POST">
+	<form action="/signup/create" method="POST" class="input-forms">
 		<div>
 			<label for="input_name">Name:</label>
 			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo isset($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus required />
@@ -16,6 +16,7 @@
 		<div>
 			<label for="input_email">Email Address:</label>
 			<input type="email" id="input_email" name="email" placeholder="name@company" value="<?php echo isset($user) ? htmlspecialchars($user->email) : ''; ?>" required />
+			<span id="email_warning"></span>
 		</div>
 		<div>
 			<label for="input_password">Password:</label>
@@ -29,4 +30,5 @@
 			<button type="submit">Sign Up</button>
 		</div>
 	</form>
+	<script src="../../js/validate-email-min.js"></script>
 <?php require_once dirname(__DIR__) . "/footer.php"; ?>

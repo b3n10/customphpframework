@@ -43,7 +43,7 @@ class User extends \Core\Model {
 		}
 
 		// email
-		if ($this->emailExists($this->email)) {
+		if (self::emailExists($this->email)) {
 			$this->errors[] = 'Email already exists !';
 		}
 		if (empty($this->email)) {
@@ -75,7 +75,7 @@ class User extends \Core\Model {
 		return $this->errors;
 	}
 
-	private function emailExists($email) {
+	public static function emailExists($email) {
 		$pdo = self::connectDB();
 		$stmt = $pdo->prepare("SELECT email from users WHERE email=:email");
 		$stmt->bindValue(":email", $email, PDO::PARAM_STR);

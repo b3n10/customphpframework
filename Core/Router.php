@@ -96,6 +96,7 @@ class Router {
 	}
 
 	private static function camelCase($action) {
+		$action = str_replace('-', '', ucwords($action, '-'));
 		return str_replace('-', '', lcfirst($action));
 	}
 
