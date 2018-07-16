@@ -15,9 +15,7 @@ class Signup extends \Core\Controller {
 
 	public function createAction() {
 		if (!$_POST) {
-			View::render("Errors/404.php", [
-				"title"	=>	"404"
-			]);
+			header('Location: http://' . $_SERVER['HTTP_HOST'] . '/error', true, 303);
 			exit;
 		}
 
@@ -32,6 +30,7 @@ class Signup extends \Core\Controller {
 				"user"	=>	$user
 			]);
 		}
+
 	}
 
 	public function successAction() {
