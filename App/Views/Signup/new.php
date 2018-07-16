@@ -1,13 +1,21 @@
 <?php require_once dirname(__DIR__) . "/header.php"; ?>
+	<?php if (isset($user->errors)): ?>
+		<h3>Errors</h3>
+		<ul>
+			<?php foreach($user->errors as $error): ?>
+			<li><?php echo htmlspecialchars($error); ?></li>
+			<?php endforeach ?>
+		</ul>
+	<?php endif ?>
 	<h1>Sign Up</h1>
 	<form action="/signup/create" method="POST">
 		<div>
 			<label for="input_name">Name:</label>
-			<input type="text" id="input_name" name="name" placeholder="Name" autofocus />
+			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo isset($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus />
 		</div>
 		<div>
 			<label for="input_email">Email Address:</label>
-			<input type="text" id="input_email" name="email" placeholder="name@company" />
+			<input type="text" id="input_email" name="email" placeholder="name@company" value="<?php echo isset($user) ? htmlspecialchars($user->email) : ''; ?>" />
 		</div>
 		<div>
 			<label for="input_password">Password:</label>

@@ -6,7 +6,7 @@ use PDO;
 
 class User extends \Core\Model {
 
-	protected $errors = [];
+	public $errors = [];
 
 	public function __construct($data) {
 		foreach ($data as $key => $value) {
@@ -16,9 +16,7 @@ class User extends \Core\Model {
 
 	public function save() {
 		if (!empty($this->validate())) {
-			foreach ($this->errors as $error) {
-				echo $error . '<br>';
-			}
+			return false;
 		} else {
 			$sql = 'INSERT INTO users (name, email, password_hash)
 				VALUES (:name, :email, :password_hash)';
@@ -37,6 +35,9 @@ class User extends \Core\Model {
 
 	public function validate() {
 		// name
+		if (strlen($this->name) < 2) {
+			$this->errors[] = 'Name must at least have 2 characters!';
+		}
 		if ($this->name === '') {
 			$this->errors[] = 'Name is required!';
 		}
@@ -45,7 +46,9 @@ class User extends \Core\Model {
 		if ($this->emailExists($this->email)) {
 			$this->errors[] = 'Email already exists !';
 		}
-		if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
+		if (empty($this->email)) {
+			$this->errors[] = 'Email is empty!';
+		} else if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
 			$this->errors[] = 'Email is invalid!';
 		}
 
