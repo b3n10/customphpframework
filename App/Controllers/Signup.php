@@ -15,7 +15,9 @@ class Signup extends \Core\Controller {
 
 	public function createAction() {
 		if (!$_POST) {
-			header('Location: http://' . $_SERVER['HTTP_HOST'] . '/error', true, 303);
+			View::render("Errors/404.php", [
+				"title"	=>	"404 Not Found",
+			]);
 			exit;
 		}
 

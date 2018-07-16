@@ -11,19 +11,19 @@
 	<form action="/signup/create" method="POST">
 		<div>
 			<label for="input_name">Name:</label>
-			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo isset($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus />
+			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo isset($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus required />
 		</div>
 		<div>
 			<label for="input_email">Email Address:</label>
-			<input type="text" id="input_email" name="email" placeholder="name@company" value="<?php echo isset($user) ? htmlspecialchars($user->email) : ''; ?>" />
+			<input type="email" id="input_email" name="email" placeholder="name@company" value="<?php echo isset($user) ? htmlspecialchars($user->email) : ''; ?>" required />
 		</div>
 		<div>
 			<label for="input_password">Password:</label>
-			<input type="password" id="input_password" name="password" placeholder="Password" />
+			<input type="password" id="input_password" name="password" placeholder="Password" required />
 		</div>
 		<div>
 			<label for="input_confirm_password">Confirm Password:</label>
-			<input type="password" id="input_confirm_password" name="confirm_password" placeholder="Repeat Password" />
+			<input type="password" id="input_confirm_password" name="confirm_password" placeholder="Repeat Password" required />
 		</div>
 		<div>
 			<button type="submit">Sign Up</button>
