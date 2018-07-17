@@ -25,6 +25,7 @@ class Login extends \Core\Controller {
 
 		if ($user) {
 
+			session_regenerate_id(true);
 			$_SESSION['user_id'] = $user->id;
 			$this->redirect('/');
 
