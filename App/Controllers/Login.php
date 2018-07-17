@@ -22,12 +22,14 @@ class Login extends \Core\Controller {
 		}
 
 		$user = User::authenticate($_POST['email'], $_POST['password']);
+
 		if ($user) {
 			header('Location: http://' . $_SERVER['HTTP_HOST'] . '/', true, 303);
-			session_start();
-			$_SESSION['user'] = $user;
 		} else {
-			header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login', true, 303);
+			View::render('Login/new.php', [
+				'title'	=>	'Login',
+				'email'	=>	$_POST['email']
+			]);
 		}
 	}
 

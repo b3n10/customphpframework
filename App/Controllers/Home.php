@@ -11,7 +11,6 @@ class Home extends \Core\Controller {
 
 		View::render('Home/index.php', [
 			'title'			=>	'HomePage',
-			'username'	=>	'test user'
 		]);
 	}
 
