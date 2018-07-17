@@ -32,7 +32,6 @@ class Signup extends \Core\Controller {
 				"user"	=>	$user
 			]);
 		}
-
 	}
 
 	public function successAction() {

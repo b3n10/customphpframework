@@ -8,7 +8,7 @@ class User extends \Core\Model {
 
 	public $errors = [];
 
-	public function __construct($data) {
+	public function __construct($data = []) {
 		foreach ($data as $key => $value) {
 			$this->$key = $value;
 		}
@@ -76,25 +76,32 @@ class User extends \Core\Model {
 	}
 
 	public static function emailExists($email) {
+		self::findByEmail($email) !== false;
+	}
+
+	private static function findByEmail($email) {
 		$pdo = self::connectDB();
-		$stmt = $pdo->prepare("SELECT email from users WHERE email=:email");
+		$stmt = $pdo->prepare("SELECT * from users WHERE email=:email");
 		$stmt->bindValue(":email", $email, PDO::PARAM_STR);
+
+		// fetch data as an object of the class (User in this case)
+		$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
 		$stmt->execute();
 
-		return $stmt->fetch() !== false;
+		return $stmt->fetch();
 	}
 
-	public static function getAll() {
-		$pdo = self::connectDB();
-		$stmt = $pdo->prepare("SELECT name FROM users");
+	public static function authenticate($email, $password) {
+		$user = self::findByEmail($email);
 
-		if ($stmt->execute()) {
-			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($user) {
+			if (password_verify($password, $user->password_hash)) {
+				return $user;
+			}
 		}
-	}
 
-	public static function first() {
-		return self::getAll()[0];
+		return false;
 	}
 
 }
