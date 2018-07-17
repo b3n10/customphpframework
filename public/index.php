@@ -19,8 +19,16 @@ $url = $_SERVER['QUERY_STRING'];
 Router::add('', [
 	'controller' => 'Home'
 ]);
+
+// custom route for logout
+Router::add('logout', [
+	'controller'	=>	'Login',
+	'action'			=>	'destroy'
+]);
+
 Router::add('{controller}');
 Router::add('{controller}/{action}');
 Router::add('{controller}/{id:\d+}/{action}');
+
 
 Router::dispatch($url);
