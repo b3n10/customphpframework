@@ -8,7 +8,7 @@ abstract class Controller {
 		$method = $name . 'Action';
 
 		if (method_exists($this, $method)) {
-			if ($this->before()) {
+			if ($this->before() !== false) {
 				call_user_func_array([$this, $method], $args);
 				$this->after();
 			}
@@ -21,5 +21,10 @@ abstract class Controller {
 	protected function before() {}
 
 	protected function after() {}
+
+	protected function redirect($url) {
+		header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
+		exit;
+	}
 
 }

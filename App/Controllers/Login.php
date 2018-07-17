@@ -24,17 +24,13 @@ class Login extends \Core\Controller {
 		$user = User::authenticate($_POST['email'], $_POST['password']);
 
 		if ($user) {
-			header('Location: http://' . $_SERVER['HTTP_HOST'] . '/', true, 303);
+			$this->redirect('/');
 		} else {
 			View::render('Login/new.php', [
 				'title'	=>	'Login',
 				'email'	=>	$_POST['email']
 			]);
 		}
-	}
-
-	protected function before() {
-		return true;
 	}
 
 }

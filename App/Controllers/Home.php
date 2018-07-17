@@ -8,14 +8,9 @@ use \App\Models\User;
 class Home extends \Core\Controller {
 
 	public function indexAction() {
-
 		View::render('Home/index.php', [
-			'title'			=>	'HomePage',
+			'title'	=>	'HomePage'
 		]);
-	}
-
-	public function before() {
-		return true;
 	}
 
 }
