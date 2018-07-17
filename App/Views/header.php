@@ -6,4 +6,3 @@
 </head>
 <body>
 <?php require_once dirname(__DIR__) . "/Views/nav.php"; ?>
-<?php session_start(); ?>

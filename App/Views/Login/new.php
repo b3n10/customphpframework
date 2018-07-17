@@ -1,6 +1,5 @@
 <?php require_once dirname(__DIR__) . "/header.php"; ?>
-<?php
-?>
+<?php echo isset($error) ? $error : ''; ?>
 	<form action="/login/create" method="POST">
 		<div>
 			<label for="input_email">Email:</label>
