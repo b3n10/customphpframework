@@ -31,4 +31,12 @@ class Auth {
 		return isset($_SESSION['user_id']);
 	}
 
+	public static function previousPage() {
+		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+	}
+
+	public static function returnToPrevPage() {
+		return $_SESSION['previous_page'] ?? '/';
+	}
+
 }

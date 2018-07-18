@@ -67,7 +67,7 @@ class Router {
 
 				// if no action is passed on $url, call index method of $controller
 				if (!isset(self::$params['action'])) {
-					$method = 'indexAction';
+					$method = 'index';
 					$controller_obj->$method();
 				} else {
 					$action = self::camelCase(self::$params['action']);

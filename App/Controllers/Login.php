@@ -26,7 +26,7 @@ class Login extends \Core\Controller {
 
 		if ($user) {
 			Auth::login($user);
-			$this->redirect('/');
+			$this->redirect(Auth::returnToPrevPage());
 		} else {
 			View::render('Login/new.php', [
 				'title'	=>	'Login',

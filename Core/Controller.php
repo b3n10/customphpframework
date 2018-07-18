@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use \App\Auth;
+
 abstract class Controller {
 
 	public function __call($name, $args) {
@@ -25,6 +27,13 @@ abstract class Controller {
 	protected function redirect($url) {
 		header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
 		exit;
+	}
+
+	public function requireLogin() {
+		if (!Auth::isLoggedIn()) {
+			Auth::previousPage();
+			$this->redirect('/login');
+		}
 	}
 
 }
