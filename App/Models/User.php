@@ -104,4 +104,17 @@ class User extends \Core\Model {
 		return false;
 	}
 
+	public static function findById($id) {
+		$pdo = self::connectDB();
+		$stmt = $pdo->prepare('SELECT * from users WHERE id=:id');
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+		// fetch data as an object of the class (User in this case)
+		$stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+		$stmt->execute();
+
+		return $stmt->fetch();
+	}
+
 }

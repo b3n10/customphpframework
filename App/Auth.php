@@ -2,6 +2,8 @@
 
 namespace App;
 
+use \App\Models\User;
+
 class Auth {
 
 	public static function login($user) {
@@ -37,6 +39,12 @@ class Auth {
 
 	public static function returnToPrevPage() {
 		return $_SESSION['previous_page'] ?? '/';
+	}
+
+	public static function getUser() {
+		if (isset($_SESSION['user_id'])) {
+			return User::findById($_SESSION['user_id']);
+		}
 	}
 
 }
