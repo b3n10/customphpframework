@@ -29,10 +29,6 @@ class Auth {
 		session_destroy();
 	}
 
-	public static function isLoggedIn() {
-		return isset($_SESSION['user_id']);
-	}
-
 	public static function previousPage() {
 		$_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
 	}
@@ -45,6 +41,7 @@ class Auth {
 		if (isset($_SESSION['user_id'])) {
 			return User::findById($_SESSION['user_id']);
 		}
+		return false;
 	}
 
 }

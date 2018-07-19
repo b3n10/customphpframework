@@ -9,8 +9,8 @@ class Posts extends Authenticated {
 
 	public function indexAction() {
 		View::render('Posts/index.php', [
-			'title'			=>	'Posts',
-			'username'	=>	$_SESSION['user_id']
+			'title'	=>	'Posts',
+			'user'	=>	Auth::getUser()
 		]);
 	}
 
