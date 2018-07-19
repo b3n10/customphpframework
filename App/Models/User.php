@@ -44,7 +44,7 @@ class User extends \Core\Model {
 
 		// email
 		if (self::emailExists($this->email)) {
-			$this->errors[] = 'Email already exists !';
+			$this->errors[] = 'Email already exists!';
 		}
 		if (empty($this->email)) {
 			$this->errors[] = 'Email is empty!';
@@ -76,7 +76,7 @@ class User extends \Core\Model {
 	}
 
 	public static function emailExists($email) {
-		self::findByEmail($email) !== false;
+		return self::findByEmail($email) !== false;
 	}
 
 	private static function findByEmail($email) {

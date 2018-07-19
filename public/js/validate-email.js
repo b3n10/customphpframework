@@ -8,7 +8,7 @@ function validateEmail() {
 
 	xhr.onload = () => {
 		if (xhr.status === 200) {
-			warning.innerText = JSON.parse(xhr.responseText) ? 'Email already taken!' : 'Email is available!';
+			warning.innerText = JSON.parse(xhr.responseText) ? 'Email already taken!' : '';
 		}
 	};
 
