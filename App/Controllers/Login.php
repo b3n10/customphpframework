@@ -5,12 +5,13 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\User;
 use \App\Auth;
+use \App\Flash;
 
 class Login extends \Core\Controller {
 
 	public function indexAction() {
 		View::render('Login/new.php', [
-			'title'	=>	'Login'
+			'title' => 'Login'
 		]);
 	}
 
@@ -26,18 +27,24 @@ class Login extends \Core\Controller {
 
 		if ($user) {
 			Auth::login($user);
+			Flash::addMessage('Login successful!');
 			$this->redirect(Auth::returnToPrevPage());
 		} else {
+			Flash::addMessage('Invalid email/password!');
 			View::render('Login/new.php', [
 				'title'	=>	'Login',
-				'email'	=>	$_POST['email'],
-				'error'	=>	'Invalid email/password. Please try again.'
+				'email'	=>	htmlspecialchars($_POST['email'])
 			]);
 		}
 	}
 
 	public function destroyAction() {
 		Auth::logout();
+		$this->redirect('/login/show-logout-message');
+	}
+
+	public function showLogoutMessageAction() {
+		Flash::addMessage('Logout successful!');
 		$this->redirect('/');
 	}
 
