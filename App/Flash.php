@@ -4,8 +4,15 @@ namespace App;
 
 class Flash {
 
-	public static function addMessage($msg) {
-		$_SESSION['notification'] = $msg;
+	const SUCCESS = 'success';
+	const INFO = 'info';
+	const WARNING = 'warning';
+
+	public static function addMessage($msg = '', $type = 'success') {
+		$_SESSION['notification'] = [
+			'body'	=>	$msg,
+			'type'	=>	$type
+		];
 	}
 
 	public static function getMessage() {
@@ -14,6 +21,7 @@ class Flash {
 			unset($_SESSION['notification']);
 			return $notification;
 		}
+		return [];
 	}
 
 }

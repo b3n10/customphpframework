@@ -30,7 +30,7 @@ class Login extends \Core\Controller {
 			Flash::addMessage('Login successful!');
 			$this->redirect(Auth::returnToPrevPage());
 		} else {
-			Flash::addMessage('Invalid email/password!');
+			Flash::addMessage('Invalid email/password!', Flash::WARNING);
 			View::render('Login/new.php', [
 				'title'	=>	'Login',
 				'email'	=>	htmlspecialchars($_POST['email'])

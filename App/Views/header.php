@@ -6,6 +6,6 @@
 </head>
 <body>
 <?php require_once dirname(__DIR__) . "/Views/nav.php"; ?>
-<?php echo '<div class="notification">'; ?>
-<?php echo $notification ?? ''; ?>
+<?php echo "<div class='notification " . ($notification['type'] ?? '') .  "'>"; ?>
+<?php echo $notification['body'] ?? ''; ?>
 <?php echo '</div>'; ?>

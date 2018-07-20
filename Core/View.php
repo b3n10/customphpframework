@@ -11,7 +11,8 @@ class View {
 
 		if (is_readable($file)) {
 			extract($args, EXTR_SKIP);
-			$notification	= htmlspecialchars(Flash::getMessage());
+			$notification = [];
+			foreach(Flash::getMessage() as $key => $value) { $notification[$key] = htmlspecialchars($value); }
 			require_once $file;
 		} else {
 			throw new \Exception("File $file not found!");
