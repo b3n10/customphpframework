@@ -15,5 +15,6 @@ function validateEmail() {
 	xhr.send();
 }
 
+email.addEventListener('focus', validateEmail, true);
 email.addEventListener('change', validateEmail);
 email.addEventListener('blur', validateEmail);
