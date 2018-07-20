@@ -11,7 +11,7 @@ class Model {
 		static $db = null;
 
 		if (!$db) {
-			$dsn = "mysql:host=" . Config::DBHOST . ";dbname=" . Config::DBNAME;
+			$dsn = Config::DSNPREFIX . ":host=" . Config::DBHOST . ";dbname=" . Config::DBNAME;
 			$username = Config::DBUSER;
 			$password = Config::DBPASSWORD;
 

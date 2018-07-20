@@ -11,11 +11,11 @@
 	<form action="/signup/create" method="POST" class="input-forms">
 		<div>
 			<label for="input_name">Name:</label>
-			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo isset($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus required />
+			<input type="text" id="input_name" name="name" placeholder="Name" value="<?php echo ($user) ? htmlspecialchars($user->name) : ''; ?>" autofocus required />
 		</div>
 		<div>
 			<label for="input_email">Email Address:</label>
-			<input type="email" id="input_email" name="email" placeholder="name@company" value="<?php echo isset($user) ? htmlspecialchars($user->email) : ''; ?>" required />
+			<input type="email" id="input_email" name="email" placeholder="name@company" value="<?php echo ($user) ? htmlspecialchars($user->email) : ''; ?>" required />
 			<span id="email_warning"></span>
 		</div>
 		<div>

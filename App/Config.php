@@ -3,9 +3,10 @@
 namespace App;
 
 class Config {
-	const DBHOST 			= "localhost";
-	const DBNAME 			= "mvclogin";
-	const DBUSER 			= "mvcuser";
-	const DBPASSWORD	=	"jairah";
+	const DSNPREFIX		=	'pgsql';
+	const DBHOST 			= 'localhost';
+	const DBNAME 			= 'blog'; // mvclogin
+	const DBUSER 			= 'blogger01'; // mvcuser
+	const DBPASSWORD	=	'blogger01'; // jairah
 	const SHOW_ERRORS	=	true;
 }
